@@ -51,7 +51,7 @@ onMounted(() => {
                     isLoaded.value = true
                 }, 200)
             }
-        });
+        })
     }
 })
 
