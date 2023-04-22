@@ -23,7 +23,7 @@
                         User name
                     </div>
                     <button 
-                    
+                        @click="$generalStore.isEditProfileOpen = true"
                         v-if="true"
                         class="
                         flex 
@@ -88,5 +88,9 @@
 </template>
 
 <script setup>
+//import { storeToRefs } from 'pinia';
 import MainLayout from "../../layouts/MainLayout.vue";
+
+const { $generalStore } = useNuxtApp()
+//const { isEditProfileOpen } = storeToRefs($generalStore)
 </script>
