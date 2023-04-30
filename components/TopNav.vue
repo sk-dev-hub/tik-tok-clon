@@ -86,41 +86,36 @@
 </template>
 
 <script setup>
+const { $userStore, $generalStore } = useNuxtApp()
 
-    import { storeToRefs } from 'pinia';
-    const { $userStore, $generalStore } = useNuxtApp()
-    
-    const { userStore } = storeToRefs($userStore)
-    
-    const route = useRoute()
-    const router = useRouter()
-    
-    let showMenu = ref(false)
+const route = useRoute()
+const router = useRouter()
 
-    onMounted(() => {
-        document.addEventListener('mouseup', function(e) {
-            let popupMenu = document.getElementById('PopupMenu');
-            if (!popupMenu.contains(e.target)) {
-                showMenu.value = false
-            }
-        });
-    })
+let showMenu = ref(false)
 
-    const isLoggedIn = () => {
-        if ($userStore.id) {
-            router.push('/upload')
-        } else {
-            $generalStore.isLoginOpen = true
+onMounted(() => {
+    document.addEventListener('mouseup', function(e) {
+        let popupMenu = document.getElementById('PopupMenu');
+        if (!popupMenu.contains(e.target)) {
+            showMenu.value = false
         }
-    }
+    });
+})
 
-    const logout = () => {
-        try {
-            $userStore.logout()
-            router.push('/')
-        } catch (error) {
-            console.log(error)
-        }
+const isLoggedIn = () => {
+    if ($userStore.id) {
+        router.push('/upload')
+    } else {
+        $generalStore.isLoginOpen = true
     }
+}
+
+const logout = () => {
+    try {
+        $userStore.logout()
+        router.push('/')
+    } catch (error) {
+        console.log(error)
+    }
+}
 </script>
-

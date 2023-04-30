@@ -55,6 +55,39 @@ export const useGeneralStore = defineStore('general', {
                         return Promise.reject(error)
                 }
             })
+        },
+
+        async getRandomUser(type) {
+            let res = await $axios.get(`/api/get-random-users`) 
+
+            if(type === 'suggested') {
+                this.suggested = res.data.suggested
+            }
+
+            if(type === 'following') {
+                this.following = res.data.following
+            }
+        },
+
+        async getPostById(id) {
+            let res = await $axios.get(`/api/post/${id}`)
+
+            this.$state.selectedPost = res.data.post[0]
+            this.$state.ids = res.data.ids
+        },
+
+        updateSideMenuImage(array, user) {
+            for (let i = 0; i < array.length; i++) {
+                const res = array[i];
+                if (res.id == user.id) {
+                    res.image = user.image
+                }
+            }
+        },
+
+        async getAllUsersAndPosts() {
+            let res = await $axios.get('/api/home')
+            this.posts = res.data
         }
     },
     persist: true
