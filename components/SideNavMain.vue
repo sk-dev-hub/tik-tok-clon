@@ -87,6 +87,6 @@ const isLoggedIn = (fol) => {
         return
     }
 
-    setTimeout(() => router.push(`/profile/$(fol.id)`), 200)
+    setTimeout(() => router.push(`/profile/${fol.id}`), 200)
 }
 </script>

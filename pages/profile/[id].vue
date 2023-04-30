@@ -60,7 +60,7 @@
                     <span class="text-gray-500 font-light text-[15px] pl-1.5">Followers</span>
                 </div>
                 <div class="mr-4">
-                    <span class="font-bold" >3K</span>
+                    <span class="font-bold" >{{ allLikes }}</span>
                     <span class="text-gray-500 font-light text-[15px] pl-1.5">Likes</span>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             </div>
 
             <div class="mt-4 grid 2xl:grid-cols-6 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-3">
-                <div v-if="show" v-for="post in $profileStore.posts">
+                <div v-if="show" v-for="post in $profileStore.posts" :key="post">
                     <PostUser :post="post"/>
                 </div>
                 
@@ -94,10 +94,12 @@ import MainLayout from "../../layouts/MainLayout.vue";
 
 import { storeToRefs } from 'pinia';
 const { $userStore, $profileStore, $generalStore } = useNuxtApp()
-const { posts } = storeToRefs($profileStore)
+const { posts, allLikes } = storeToRefs($profileStore)
 
 const route = useRoute()
 let show = ref(false)
+
+definePageMeta({ middleware: 'auth' })
 
 onMounted(async () => {
     try {

@@ -25,7 +25,7 @@ export const useProfileStore = defineStore('profile', {
 
       this.$state.posts = res.data.posts
 
-      //this.allLikesCount()
+      this.allLikesCount()
     },
 
     allLikesCount() {
